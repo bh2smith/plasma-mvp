@@ -61,4 +61,3 @@ class ChildChain(object):
 
     def get_current_block(self):
         return self.current_block
-
