@@ -177,7 +177,7 @@ Creates a transaction and submits it to the child chain.
 #### Usage
 
 ```
-sendtx <blknum1> <txindex1> <oindex1> <blknum2> <txindex2> <oindex2> <newowner1> <amount1> <newowner2> <amount2> <fee> <key1> [<key2>]
+sendtx <blknum1> <txindex1> <oindex1> <blknum2> <txindex2> <oindex2> <cur12> <newowner1> <amount1> <newowner2> <amount2> <fee> <key1> [<key2>]
 ```
 
 #### Example
