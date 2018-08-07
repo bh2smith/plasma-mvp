@@ -50,7 +50,8 @@ class Client(object):
         self.root_chain.startExit(utxo_pos, encoded_transaction, proof, sigs, transact={'from': '0x' + tx.newowner1.hex()})
 
     def withdraw_deposit(self, owner, deposit_pos, amount):
-        self.root_chain.startDepositExit(deposit_pos, amount, transact={'from': owner})
+        addy = '0x' + str(NULL_ADDRESS.hex())
+        self.root_chain.startDepositExit(deposit_pos, addy,  amount, transact={'from': owner})
 
     def get_transaction(self, blknum, txindex):
         encoded_transaction = self.child_chain.get_transaction(blknum, txindex)
