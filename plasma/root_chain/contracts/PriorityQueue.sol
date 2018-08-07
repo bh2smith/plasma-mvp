@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.22;
 
 import "./SafeMath.sol";
 
@@ -10,43 +10,28 @@ import "./SafeMath.sol";
 contract PriorityQueue {
     using SafeMath for uint256;
 
-    /*
-     *  Modifiers
-     */
     modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
 
-    /* 
-     *  Storage
-     */
-    address owner;
-    uint256[] heapList;
+    address public owner;
+    uint256[] public heapList;
     uint256 public currentSize;
 
-    function PriorityQueue()
-        public
-    {
+    constructor() public {
         owner = msg.sender;
         heapList = [0];
         currentSize = 0;
     }
 
-    function insert(uint256 k) 
-        public
-        onlyOwner
-    {
+    function insert(uint256 k) public onlyOwner {
         heapList.push(k);
         currentSize = currentSize.add(1);
         percUp(currentSize);
     }
 
-    function minChild(uint256 i)
-        public
-        view
-        returns (uint256)
-    {
+    function minChild(uint256 i) public view returns (uint256) {
         if (i.mul(2).add(1) > currentSize) {
             return i.mul(2);
         } else {
@@ -58,19 +43,11 @@ contract PriorityQueue {
         }
     }
 
-    function getMin()
-        public
-        view
-        returns (uint256)
-    {
+    function getMin() public view returns (uint256) {
         return heapList[1];
     }
 
-    function delMin()
-        public
-        onlyOwner
-        returns (uint256)
-    {
+    function delMin() public onlyOwner returns (uint256) {
         uint256 retVal = heapList[1];
         heapList[1] = heapList[currentSize];
         delete heapList[currentSize];
@@ -80,9 +57,7 @@ contract PriorityQueue {
         return retVal;
     }
 
-    function percUp(uint256 i) 
-        private
-    {
+    function percUp(uint256 i) private {
         uint256 j = i;
         uint256 newVal = heapList[i];
         while (newVal < heapList[i.div(2)]) {
